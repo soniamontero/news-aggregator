@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import getResults from "../api/api";
 import Article from "../components/article";
 
@@ -35,14 +35,15 @@ const Home = () => {
     return results.map((articlesGroup, i) => (
       <div className="api" key={i}>
         <h4 className="title">{articlesGroup.source}</h4>
-        {Object.keys(articlesGroup.results).map((key, i) => (
-          <div className="section" key={i}>
-            <h4>{key.toUpperCase()}</h4>
-            {articlesGroup.results[key].map((article, i) => (
-              <Article content={article} key={i} />
-            ))}
-          </div>
-        ))}
+        {articlesGroup.results &&
+          Object.keys(articlesGroup.results).map((key, i) => (
+            <div className="section" key={i}>
+              <h4>{key.toUpperCase()}</h4>
+              {articlesGroup.results[key].map((article, i) => (
+                <Article content={article} key={i} />
+              ))}
+            </div>
+          ))}
       </div>
     ));
   };
