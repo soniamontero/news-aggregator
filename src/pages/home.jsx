@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import dayjs from "dayjs";
 import getResults from "../api/api";
+import Article from "../components/article";
 
 const Home = () => {
   const [results, setResults] = useState([]);
@@ -15,10 +15,6 @@ const Home = () => {
     if (selectedApis.indexOf(name) !== -1) setSelectedApis(selectedApis.filter(api => api !== name));
     else setSelectedApis([...selectedApis, name]);
   };
-
-  useEffect(() => {
-    console.log(results);
-  }, [results]);
 
   const generateApiOptions = () => {
     const apiNames = ["guardian", "times"];
@@ -43,12 +39,7 @@ const Home = () => {
           <div className="section" key={i}>
             <h4>{key.toUpperCase()}</h4>
             {articlesGroup.results[key].map((article, i) => (
-              <div className="article" key={i}>
-                <h5>{article.webTitle}</h5>
-                <p>Published {dayjs(article.webPublicationDate).format("DD/MM/YYYY")}</p>
-                <a href={article.webUrl}>Read more</a>
-                <button>Save</button>
-              </div>
+              <Article content={article} key={i} />
             ))}
           </div>
         ))}
