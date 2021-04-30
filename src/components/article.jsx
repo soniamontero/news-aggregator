@@ -1,13 +1,13 @@
 import React from "react";
 import dayjs from "dayjs";
 
-const Article = ({ content }) => {
+const Article = ({ content, handleClick }) => {
   return (
     <div className="article">
       <h5>{content.title}</h5>
       <p>Published {dayjs(content.date).format("DD/MM/YYYY")}</p>
       <a href={content.url}>Read more</a>
-      <button>Save</button>
+      <button onClick={() => handleClick(content)}>Save</button>
     </div>
   );
 };
